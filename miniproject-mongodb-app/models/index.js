@@ -2,4 +2,5 @@
 module.exports = {
     Weapon: require("./weapon"),
     Shield: require("./shield"),
+    Head: require("./head"),
 };
