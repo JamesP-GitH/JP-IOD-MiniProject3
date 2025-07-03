@@ -70,7 +70,7 @@ const getAllWeaponTypes = (req, res) => {
 const getWeaponNames = (req, res) => {
     Models.Weapon.find({}, { name: 1, _id: 0 })
         .then((data) => {
-            const names = data.map((item) => itme.name);
+            const names = data.map((item) => item.name);
             res.send({ result: 200, data: names });
         })
         .catch((err) => {

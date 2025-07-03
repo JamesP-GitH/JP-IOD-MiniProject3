@@ -17,6 +17,7 @@ router.get("/name/:name", (req, res) => {
     Controllers.weaponController.getWeaponByName(req, res);
 });
 
+// Get list of weapon types
 router.get("/type", (req, res) => {
     Controllers.weaponController.getAllWeaponTypes(req, res);
 });

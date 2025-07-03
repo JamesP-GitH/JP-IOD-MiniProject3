@@ -7,8 +7,10 @@ require("dotenv").config();
 app.use(express.json());
 
 let weaponRoutes = require("./routes/weaponRoutes");
+let shieldRoutes = require("./routes/shieldRoutes");
 
 app.use("/api/weapons", weaponRoutes);
+app.use("/api/shields", shieldRoutes);
 
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to my MongoDB application." });
