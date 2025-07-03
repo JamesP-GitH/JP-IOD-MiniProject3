@@ -2,19 +2,9 @@ let express = require("express");
 let router = express.Router();
 let Controllers = require("../controllers");
 
-// Get all weapons
-router.get("/", (req, res) => {
-    Controllers.weaponController.getAllWeapons(req, res);
-});
-
 // Get list of weapon names
 router.get("/names", (req, res) => {
     Controllers.weaponController.getWeaponNames(req, res);
-});
-
-// Get weapons by name
-router.get("/name/:name", (req, res) => {
-    Controllers.weaponController.getWeaponByName(req, res);
 });
 
 // Get list of weapon types
@@ -27,9 +17,19 @@ router.get("/type/:type", (req, res) => {
     Controllers.weaponController.getWeaponByType(req, res);
 });
 
+// Get weapons by name
+router.get("/name/:name", (req, res) => {
+    Controllers.weaponController.getWeaponByName(req, res);
+});
+
 // Get weapon by ID
 router.get("/:id", (req, res) => {
     Controllers.weaponController.getWeaponById(req, res);
+});
+
+// Get all weapons
+router.get("/", (req, res) => {
+    Controllers.weaponController.getAllWeapons(req, res);
 });
 
 // Create a new weapon

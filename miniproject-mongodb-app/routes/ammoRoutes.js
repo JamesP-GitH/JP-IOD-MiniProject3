@@ -2,14 +2,9 @@ let express = require("express");
 let router = express.Router();
 let Controllers = require("../controllers");
 
-// Get all ammos
-router.get("/", (req, res) => {
-    Controllers.ammoController.getAllAmmos(req, res);
-});
-
-// Get ammo by ID
-router.get("/:id", (req, res) => {
-    Controllers.ammoController.getAmmoById(req, res);
+// Get list of ammo names only
+router.get("/names", (req, res) => {
+    Controllers.ammoController.getAmmoNames(req, res);
 });
 
 // Get ammos by name (search with regex)
@@ -17,9 +12,14 @@ router.get("/name/:name", (req, res) => {
     Controllers.ammoController.getAmmoByName(req, res);
 });
 
-// Get list of ammo names only
-router.get("/names", (req, res) => {
-    Controllers.ammoController.getAmmoNames(req, res);
+// Get ammo by ID
+router.get("/:id", (req, res) => {
+    Controllers.ammoController.getAmmoById(req, res);
+});
+
+// Get all ammos
+router.get("/", (req, res) => {
+    Controllers.ammoController.getAllAmmos(req, res);
 });
 
 // Create a new ammo

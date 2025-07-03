@@ -2,14 +2,9 @@ let express = require("express");
 let router = express.Router();
 let Controllers = require("../controllers");
 
-// Get all rings
-router.get("/", (req, res) => {
-    Controllers.ringController.getAllRings(req, res);
-});
-
-// Get ring by ID
-router.get("/:id", (req, res) => {
-    Controllers.ringController.getRingById(req, res);
+// Get list of ring names only
+router.get("/names", (req, res) => {
+    Controllers.ringController.getRingNames(req, res);
 });
 
 // Get rings by name (search with regex)
@@ -17,9 +12,14 @@ router.get("/name/:name", (req, res) => {
     Controllers.ringController.getRingByName(req, res);
 });
 
-// Get list of ring names only
-router.get("/names", (req, res) => {
-    Controllers.ringController.getRingNames(req, res);
+// Get ring by ID
+router.get("/:id", (req, res) => {
+    Controllers.ringController.getRingById(req, res);
+});
+
+// Get all rings
+router.get("/", (req, res) => {
+    Controllers.ringController.getAllRings(req, res);
 });
 
 // Create a new ring

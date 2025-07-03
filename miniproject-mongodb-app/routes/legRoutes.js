@@ -2,14 +2,9 @@ let express = require("express");
 let router = express.Router();
 let Controllers = require("../controllers");
 
-// Get all legs
-router.get("/", (req, res) => {
-    Controllers.legController.getAllLegs(req, res);
-});
-
-// Get leg by ID
-router.get("/:id", (req, res) => {
-    Controllers.legController.getLegById(req, res);
+// Get list of leg names only
+router.get("/names", (req, res) => {
+    Controllers.legController.getLegNames(req, res);
 });
 
 // Get legs by name (search with regex)
@@ -17,9 +12,14 @@ router.get("/name/:name", (req, res) => {
     Controllers.legController.getLegByName(req, res);
 });
 
-// Get list of leg names only
-router.get("/names", (req, res) => {
-    Controllers.legController.getLegNames(req, res);
+// Get leg by ID
+router.get("/:id", (req, res) => {
+    Controllers.legController.getLegById(req, res);
+});
+
+// Get all legs
+router.get("/", (req, res) => {
+    Controllers.legController.getAllLegs(req, res);
 });
 
 // Create a new leg
