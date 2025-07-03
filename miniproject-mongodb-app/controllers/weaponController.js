@@ -1,6 +1,7 @@
 "use strict";
 let Models = require("../models");
 
+// Get all weapon items
 const getAllWeapons = (req, res) => {
     Models.Weapon.find({})
         .then((data) => res.send({ result: 200, data }))
@@ -10,6 +11,7 @@ const getAllWeapons = (req, res) => {
         });
 };
 
+// Get a single weapon item by its ID
 const getWeaponById = (req, res) => {
     Models.Weapon.findById(req.params.id)
         .then((data) => {
@@ -24,6 +26,7 @@ const getWeaponById = (req, res) => {
         });
 };
 
+// Get weapon items by name 
 const getWeaponByName = (req, res) => {
     Models.Weapon.find({ name: { $regex: req.params.name, $options: "i" } })
         .then((data) => {
@@ -38,6 +41,7 @@ const getWeaponByName = (req, res) => {
         });
 };
 
+// Get weapon items by weapon_type
 const getWeaponByType = (req, res) => {
     const type = req.params.type;
     Models.Weapon.find({ "weapon.weapon_type": type })
@@ -53,6 +57,7 @@ const getWeaponByType = (req, res) => {
         });
 };
 
+// Get all unique weapon types
 const getAllWeaponTypes = (req, res) => {
     Models.Weapon.distinct("weapon.weapon_type")
         .then((types) => {
@@ -67,6 +72,7 @@ const getAllWeaponTypes = (req, res) => {
         });
 };
 
+// Get all weapon names only
 const getWeaponNames = (req, res) => {
     Models.Weapon.find({}, { name: 1, _id: 0 })
         .then((data) => {
@@ -79,6 +85,7 @@ const getWeaponNames = (req, res) => {
         });
 };
 
+// Create a new weapon item
 const createWeapon = (req, res) => {
     const newWeapon = new Models.Weapon(req.body);
     newWeapon
@@ -90,6 +97,7 @@ const createWeapon = (req, res) => {
         });
 };
 
+// Update an existing weapon item by ID
 const updateWeapon = (req, res) => {
     Models.Weapon.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((data) => res.send({ result: 200, data }))
@@ -99,6 +107,7 @@ const updateWeapon = (req, res) => {
         });
 };
 
+// Delete a weapon item by ID
 const deleteWeapon = (req, res) => {
     Models.Weapon.findByIdAndDelete(req.params.id)
         .then((data) => res.send({ result: 200, data }))

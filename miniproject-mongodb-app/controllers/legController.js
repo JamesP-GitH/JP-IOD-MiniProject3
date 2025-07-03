@@ -1,6 +1,7 @@
 "use strict";
 let Models = require("../models");
 
+// Get all leg items
 const getAllLegs = (req, res) => {
     Models.Leg.find({})
         .then((data) => res.send({ result: 200, data }))
@@ -10,6 +11,7 @@ const getAllLegs = (req, res) => {
         });
 };
 
+// Get a single leg item by its ID
 const getLegById = (req, res) => {
     Models.Leg.findById(req.params.id)
         .then((data) => {
@@ -23,6 +25,7 @@ const getLegById = (req, res) => {
             res.send({ result: 500, error: err.message });
         });
 };
+// Get leg items by name
 const getLegByName = (req, res) => {
     Models.Leg.find({ name: { $regex: req.params.name, $options: "i" } })
         .then((data) => {
@@ -37,6 +40,7 @@ const getLegByName = (req, res) => {
         });
 };
 
+// Get all leg names only
 const getLegNames = (req, res) => {
     Models.Leg.find({}, { name: 1, _id: 0 })
         .then((data) => {
@@ -49,6 +53,7 @@ const getLegNames = (req, res) => {
         });
 };
 
+// Create a new leg item
 const createLeg = (req, res) => {
     const newLeg = new Models.Leg(req.body);
     newLeg
@@ -60,6 +65,7 @@ const createLeg = (req, res) => {
         });
 };
 
+// Update an existing leg item by ID
 const updateLeg = (req, res) => {
     Models.Leg.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((data) => res.send({ result: 200, data }))
@@ -69,6 +75,7 @@ const updateLeg = (req, res) => {
         });
 };
 
+// Delete a leg item by ID
 const deleteLeg = (req, res) => {
     Models.Leg.findByIdAndDelete(req.params.id)
         .then((data) => res.send({ result: 200, data }))

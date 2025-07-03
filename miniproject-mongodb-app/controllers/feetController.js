@@ -1,6 +1,7 @@
 "use strict";
 let Models = require("../models");
 
+// Get all feet items
 const getAllFeets = (req, res) => {
     Models.Feet.find({})
         .then((data) => res.send({ result: 200, data }))
@@ -10,6 +11,7 @@ const getAllFeets = (req, res) => {
         });
 };
 
+// Get a single feet item by its ID
 const getFeetById = (req, res) => {
     Models.Feet.findById(req.params.id)
         .then((data) => {
@@ -24,6 +26,7 @@ const getFeetById = (req, res) => {
         });
 };
 
+// Get feet items by name
 const getFeetByName = (req, res) => {
     Models.Feet.find({ name: { $regex: req.params.name, $options: "i" } })
         .then((data) => {
@@ -38,6 +41,7 @@ const getFeetByName = (req, res) => {
         });
 };
 
+// Get all feet names only
 const getFeetNames = (req, res) => {
     Models.Feet.find({}, { name: 1, _id: 0 })
         .then((data) => {
@@ -50,6 +54,7 @@ const getFeetNames = (req, res) => {
         });
 };
 
+// Create a new feet item
 const createFeet = (req, res) => {
     const newFeet = new Models.Feet(req.body);
     newFeet
@@ -61,6 +66,7 @@ const createFeet = (req, res) => {
         });
 };
 
+// Update an existing feet item by ID
 const updateFeet = (req, res) => {
     Models.Feet.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((data) => res.send({ result: 200, data }))
@@ -70,6 +76,7 @@ const updateFeet = (req, res) => {
         });
 };
 
+// Delete a feet item by ID
 const deleteFeet = (req, res) => {
     Models.Feet.findByIdAndDelete(req.params.id)
         .then((data) => res.send({ result: 200, data }))

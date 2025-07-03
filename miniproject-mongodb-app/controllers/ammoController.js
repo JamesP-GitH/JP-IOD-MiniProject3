@@ -1,6 +1,7 @@
 "use strict";
 let Models = require("../models");
 
+// Get all ammo items
 const getAllAmmos = (req, res) => {
     Models.Ammo.find({})
         .then((data) => res.send({ result: 200, data }))
@@ -10,6 +11,7 @@ const getAllAmmos = (req, res) => {
         });
 };
 
+// Get a single ammo item by its ID
 const getAmmoById = (req, res) => {
     Models.Ammo.findById(req.params.id)
         .then((data) => {
@@ -24,6 +26,7 @@ const getAmmoById = (req, res) => {
         });
 };
 
+// Get ammo items by name
 const getAmmoByName = (req, res) => {
     Models.Ammo.find({ name: { $regex: req.params.name, $options: "i" } })
         .then((data) => {
@@ -38,6 +41,7 @@ const getAmmoByName = (req, res) => {
         });
 };
 
+// Get all ammo names only
 const getAmmoNames = (req, res) => {
     Models.Ammo.find({}, { name: 1, _id: 0 })
         .then((data) => {
@@ -50,6 +54,7 @@ const getAmmoNames = (req, res) => {
         });
 };
 
+// Create a new ammo item
 const createAmmo = (req, res) => {
     const newAmmo = new Models.Ammo(req.body);
     newAmmo
@@ -61,6 +66,7 @@ const createAmmo = (req, res) => {
         });
 };
 
+// Update an existing ammo item by ID
 const updateAmmo = (req, res) => {
     Models.Ammo.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((data) => res.send({ result: 200, data }))
@@ -70,6 +76,7 @@ const updateAmmo = (req, res) => {
         });
 };
 
+// Delete an ammo item by ID
 const deleteAmmo = (req, res) => {
     Models.Ammo.findByIdAndDelete(req.params.id)
         .then((data) => res.send({ result: 200, data }))

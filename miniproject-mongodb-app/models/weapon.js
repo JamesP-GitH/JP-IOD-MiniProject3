@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// Weapon stance  schema
 const weaponStanceSchema = new Schema(
     {
         combat_style: String,
@@ -11,6 +12,7 @@ const weaponStanceSchema = new Schema(
     { _id: false }
 );
 
+// Weapon-specific schema (nested in itemSchema)
 const weaponSchema = new Schema(
     {
         attack_speed: Number,
@@ -20,6 +22,7 @@ const weaponSchema = new Schema(
     { _id: false }
 );
 
+// Equipment stats schema (nested in itemSchema)
 const equipmentSchema = new Schema(
     {
         attack_stab: Number,
@@ -42,6 +45,7 @@ const equipmentSchema = new Schema(
     { _id: false }
 );
 
+// Main item schema for weapons
 const itemSchema = new Schema(
     {
         _id: Number,

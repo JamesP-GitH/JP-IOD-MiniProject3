@@ -1,6 +1,7 @@
 "use strict";
 let Models = require("../models");
 
+// Get all cape items
 const getAllCapes = (req, res) => {
     Models.Cape.find({})
         .then((data) => res.send({ result: 200, data }))
@@ -10,6 +11,7 @@ const getAllCapes = (req, res) => {
         });
 };
 
+// Get a single cape item by its ID
 const getCapeById = (req, res) => {
     Models.Cape.findById(req.params.id)
         .then((data) => {
@@ -24,6 +26,7 @@ const getCapeById = (req, res) => {
         });
 };
 
+// Get cape items by name
 const getCapeByName = (req, res) => {
     Models.Cape.find({ name: { $regex: req.params.name, $options: "i" } })
         .then((data) => {
@@ -38,6 +41,7 @@ const getCapeByName = (req, res) => {
         });
 };
 
+// Get all cape names only
 const getCapeNames = (req, res) => {
     Models.Cape.find({}, { name: 1, _id: 0 })
         .then((data) => {
@@ -50,6 +54,7 @@ const getCapeNames = (req, res) => {
         });
 };
 
+// Create a new cape item
 const createCape = (req, res) => {
     const newCape = new Models.Cape(req.body);
     newCape
@@ -61,6 +66,7 @@ const createCape = (req, res) => {
         });
 };
 
+// Update an existing cape item by ID
 const updateCape = (req, res) => {
     Models.Cape.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((data) => res.send({ result: 200, data }))
@@ -70,6 +76,7 @@ const updateCape = (req, res) => {
         });
 };
 
+// Delete a cape item by ID
 const deleteCape = (req, res) => {
     Models.Cape.findByIdAndDelete(req.params.id)
         .then((data) => res.send({ result: 200, data }))

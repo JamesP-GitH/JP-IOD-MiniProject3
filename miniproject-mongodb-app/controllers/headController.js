@@ -1,6 +1,7 @@
 "use strict";
 let Models = require("../models");
 
+// Get all head items
 const getAllHeads = (req, res) => {
     Models.Head.find({})
         .then((data) => res.send({ result: 200, data }))
@@ -10,6 +11,7 @@ const getAllHeads = (req, res) => {
         });
 };
 
+// Get a single head item by its ID
 const getHeadById = (req, res) => {
     Models.Head.findById(req.params.id)
         .then((data) => {
@@ -23,6 +25,7 @@ const getHeadById = (req, res) => {
             res.send({ result: 500, error: err.message });
         });
 };
+// Get head items by name
 const getHeadByName = (req, res) => {
     Models.Head.find({ name: { $regex: req.params.name, $options: "i" } })
         .then((data) => {
@@ -37,6 +40,7 @@ const getHeadByName = (req, res) => {
         });
 };
 
+// Get all head names only
 const getHeadNames = (req, res) => {
     Models.Head.find({}, { name: 1, _id: 0 })
         .then((data) => {
@@ -49,6 +53,7 @@ const getHeadNames = (req, res) => {
         });
 };
 
+// Create a new head item
 const createHead = (req, res) => {
     const newHead = new Models.Head(req.body);
     newHead
@@ -60,6 +65,7 @@ const createHead = (req, res) => {
         });
 };
 
+// Update an existing head item by ID
 const updateHead = (req, res) => {
     Models.Head.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((data) => res.send({ result: 200, data }))
@@ -69,6 +75,7 @@ const updateHead = (req, res) => {
         });
 };
 
+// Delete a head item by ID
 const deleteHead = (req, res) => {
     Models.Head.findByIdAndDelete(req.params.id)
         .then((data) => res.send({ result: 200, data }))

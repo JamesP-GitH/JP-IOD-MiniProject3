@@ -1,6 +1,7 @@
 "use strict";
 let Models = require("../models");
 
+// Get all ring items
 const getAllRings = (req, res) => {
     Models.Ring.find({})
         .then((data) => res.send({ result: 200, data }))
@@ -10,6 +11,7 @@ const getAllRings = (req, res) => {
         });
 };
 
+// Get a single ring item by its ID
 const getRingById = (req, res) => {
     Models.Ring.findById(req.params.id)
         .then((data) => {
@@ -23,6 +25,7 @@ const getRingById = (req, res) => {
             res.send({ result: 500, error: err.message });
         });
 };
+// Get ring items by name
 const getRingByName = (req, res) => {
     Models.Ring.find({ name: { $regex: req.params.name, $options: "i" } })
         .then((data) => {
@@ -37,6 +40,7 @@ const getRingByName = (req, res) => {
         });
 };
 
+// Get all ring names only
 const getRingNames = (req, res) => {
     Models.Ring.find({}, { name: 1, _id: 0 })
         .then((data) => {
@@ -49,6 +53,7 @@ const getRingNames = (req, res) => {
         });
 };
 
+// Create a new ring item
 const createRing = (req, res) => {
     const newRing = new Models.Ring(req.body);
     newRing
@@ -60,6 +65,7 @@ const createRing = (req, res) => {
         });
 };
 
+// Update an existing ring item by ID
 const updateRing = (req, res) => {
     Models.Ring.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((data) => res.send({ result: 200, data }))
@@ -69,6 +75,7 @@ const updateRing = (req, res) => {
         });
 };
 
+// Delete a ring item by ID
 const deleteRing = (req, res) => {
     Models.Ring.findByIdAndDelete(req.params.id)
         .then((data) => res.send({ result: 200, data }))

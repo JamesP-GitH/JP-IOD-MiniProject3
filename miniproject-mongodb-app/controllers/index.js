@@ -1,5 +1,3 @@
-const feet = require("../models/feet");
-
 module.exports = {
     weaponController: require("./weaponController"),
     shieldController: require("./shieldController"),

@@ -1,6 +1,7 @@
 "use strict";
 let Models = require("../models");
 
+// Get all hand items
 const getAllHands = (req, res) => {
     Models.Hand.find({})
         .then((data) => res.send({ result: 200, data }))
@@ -10,6 +11,7 @@ const getAllHands = (req, res) => {
         });
 };
 
+// Get a single hand item by its ID
 const getHandById = (req, res) => {
     Models.Hand.findById(req.params.id)
         .then((data) => {
@@ -23,6 +25,7 @@ const getHandById = (req, res) => {
             res.send({ result: 500, error: err.message });
         });
 };
+// Get hand items by name
 const getHandByName = (req, res) => {
     Models.Hand.find({ name: { $regex: req.params.name, $options: "i" } })
         .then((data) => {
@@ -37,6 +40,7 @@ const getHandByName = (req, res) => {
         });
 };
 
+// Get all hand names only
 const getHandNames = (req, res) => {
     Models.Hand.find({}, { name: 1, _id: 0 })
         .then((data) => {
@@ -49,6 +53,7 @@ const getHandNames = (req, res) => {
         });
 };
 
+// Create a new hand item
 const createHand = (req, res) => {
     const newHand = new Models.Hand(req.body);
     newHand
@@ -60,6 +65,7 @@ const createHand = (req, res) => {
         });
 };
 
+// Update an existing hand item by ID
 const updateHand = (req, res) => {
     Models.Hand.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((data) => res.send({ result: 200, data }))
@@ -69,6 +75,7 @@ const updateHand = (req, res) => {
         });
 };
 
+// Delete a hand item by ID
 const deleteHand = (req, res) => {
     Models.Hand.findByIdAndDelete(req.params.id)
         .then((data) => res.send({ result: 200, data }))

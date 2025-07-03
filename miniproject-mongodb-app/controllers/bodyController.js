@@ -1,6 +1,7 @@
 "use strict";
 let Models = require("../models");
 
+// Get all body items
 const getAllBodies = (req, res) => {
     Models.Body.find({})
         .then((data) => res.send({ result: 200, data }))
@@ -10,6 +11,7 @@ const getAllBodies = (req, res) => {
         });
 };
 
+// Get a single body item by its ID
 const getBodyById = (req, res) => {
     Models.Body.findById(req.params.id)
         .then((data) => {
@@ -23,6 +25,7 @@ const getBodyById = (req, res) => {
             res.send({ result: 500, error: err.message });
         });
 };
+// Get body items by name
 const getBodyByName = (req, res) => {
     Models.Body.find({ name: { $regex: req.params.name, $options: "i" } })
         .then((data) => {
@@ -37,6 +40,7 @@ const getBodyByName = (req, res) => {
         });
 };
 
+// Get all body names only
 const getBodyNames = (req, res) => {
     Models.Body.find({}, { name: 1, _id: 0 })
         .then((data) => {
@@ -49,6 +53,7 @@ const getBodyNames = (req, res) => {
         });
 };
 
+// Create a new body item
 const createBody = (req, res) => {
     const newBody = new Models.Body(req.body);
     newBody
@@ -60,6 +65,7 @@ const createBody = (req, res) => {
         });
 };
 
+// Update an existing body item by ID
 const updateBody = (req, res) => {
     Models.Body.findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((data) => res.send({ result: 200, data }))
@@ -69,6 +75,7 @@ const updateBody = (req, res) => {
         });
 };
 
+// Delete a body item by ID
 const deleteBody = (req, res) => {
     Models.Body.findByIdAndDelete(req.params.id)
         .then((data) => res.send({ result: 200, data }))
