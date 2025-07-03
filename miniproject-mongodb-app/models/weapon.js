@@ -7,7 +7,6 @@ const weaponStanceSchema = new Schema(
         attack_type: String,
         attack_style: String,
         experience: String,
-        boosts: mongoose.Schema.Types.Mixed,
     },
     { _id: false }
 );
@@ -26,6 +25,18 @@ const equipmentSchema = new Schema(
         attack_stab: Number,
         attack_slash: Number,
         attack_crush: Number,
+        attack_magic: Number,
+        attack_ranged: Number,
+        defence_stab: Number,
+        defence_slash: Number,
+        defence_crush: Number,
+        defence_magic: Number,
+        defence_ranged: Number,
+        melee_strength: Number,
+        ranged_strength: Number,
+        magic_damage: Number,
+        prayer: Number,
+        slot: String,
         requirements: mongoose.Schema.Types.Mixed,
     },
     { _id: false }
