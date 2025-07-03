@@ -5,4 +5,5 @@ module.exports = {
     Head: require("./head"),
     Hand: require("./hand"),
     Body: require("./body"),
+    Cape: require("./cape"),
 };

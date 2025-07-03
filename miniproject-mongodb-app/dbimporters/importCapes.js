@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 const fs = require("fs");
 const path = require("path");
-const Body = require("./models/body");
+const Cape = require("../models/cape");
 
 const mongoUri = "mongodb://localhost:27017/MiniProject3";
 
@@ -12,7 +12,7 @@ async function run() {
         await mongoose.connect(mongoUri);
         console.log("Connected to MongoDB");
 
-        const rawData = fs.readFileSync(path.join(__dirname, "items-body.json"));
+        const rawData = fs.readFileSync(path.join(__dirname, "items-cape.json"));
         const jsonData = JSON.parse(rawData);
 
         const excludeFields = [
@@ -46,10 +46,10 @@ async function run() {
                 return item;
             });
 
-        await Body.deleteMany({});
+        await Cape.deleteMany({});
         console.log("Old items removed.");
 
-        await Body.insertMany(sortedItems);
+        await Cape.insertMany(sortedItems);
         console.log(`${sortedItems.length} items inserted.`);
     } catch (error) {
         console.error("Error importing items:", error);

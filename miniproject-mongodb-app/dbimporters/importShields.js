@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 const fs = require("fs");
 const path = require("path");
-const Weapon = require("./models/weapon");
+const Shield = require("../models/shield");
 
 const mongoUri = "mongodb://localhost:27017/MiniProject3";
 
@@ -12,9 +12,8 @@ async function run() {
         await mongoose.connect(mongoUri);
         console.log("Connected to MongoDB");
 
-        const rawData1 = JSON.parse(fs.readFileSync(path.join(__dirname, "items-weapon.json")));
-        const rawData2 = JSON.parse(fs.readFileSync(path.join(__dirname, "items-2h.json")));
-        const combinedData = { ...rawData1, ...rawData2 };
+        const rawData = fs.readFileSync(path.join(__dirname, "items-shield.json"));
+        const jsonData = JSON.parse(rawData);
 
         const excludeFields = [
             "release_date",
@@ -34,7 +33,7 @@ async function run() {
             "equipable_weapon",
         ];
 
-        const sortedItems = Object.values(combinedData)
+        const sortedItems = Object.values(jsonData)
             .sort((a, b) => a.id - b.id)
             .map((item) => {
                 item._id = item.id;
@@ -47,10 +46,10 @@ async function run() {
                 return item;
             });
 
-        await Weapon.deleteMany({});
+        await Shield.deleteMany({});
         console.log("Old items removed.");
 
-        await Weapon.insertMany(sortedItems);
+        await Shield.insertMany(sortedItems);
         console.log(`${sortedItems.length} items inserted.`);
     } catch (error) {
         console.error("Error importing items:", error);
