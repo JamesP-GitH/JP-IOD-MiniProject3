@@ -12,6 +12,7 @@ let headRoutes = require("./routes/headRoutes");
 let handRoutes = require("./routes/handRoutes");
 let bodyRoutes = require("./routes/bodyRoutes");
 let capeRoutes = require("./routes/capeRoutes");
+let ammoRoutes = require("./routes/ammoRoutes");
 
 app.use("/api/weapons", weaponRoutes);
 app.use("/api/shields", shieldRoutes);
@@ -19,6 +20,7 @@ app.use("/api/heads", headRoutes);
 app.use("/api/hands", handRoutes);
 app.use("/api/bodies", bodyRoutes);
 app.use("/api/capes", capeRoutes);
+app.use("/api/ammos", ammoRoutes);
 
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to my MongoDB application." });

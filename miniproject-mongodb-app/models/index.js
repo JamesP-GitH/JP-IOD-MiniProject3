@@ -6,4 +6,5 @@ module.exports = {
     Hand: require("./hand"),
     Body: require("./body"),
     Cape: require("./cape"),
+    Ammo: require("./ammo"),
 };
