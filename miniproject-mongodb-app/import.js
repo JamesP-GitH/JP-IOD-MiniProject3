@@ -5,15 +5,16 @@ const fs = require("fs");
 const path = require("path");
 const Weapon = require("./models/weapon");
 
-const mongoUri = "mongodb://localhost:27017/MiniProject3"; 
+const mongoUri = "mongodb://localhost:27017/MiniProject3";
 
 async function run() {
     try {
         await mongoose.connect(mongoUri);
         console.log("Connected to MongoDB");
 
-        const rawData = fs.readFileSync(path.join(__dirname, "items-weapon.json"));
-        const jsonData = JSON.parse(rawData);
+        const rawData1 = JSON.parse(fs.readFileSync(path.join(__dirname, "items-weapon.json")));
+        const rawData2 = JSON.parse(fs.readFileSync(path.join(__dirname, "items-2h.json")));
+        const combinedData = { ...rawData1, ...rawData2 };
 
         const excludeFields = [
             "release_date",
@@ -33,25 +34,24 @@ async function run() {
             "equipable_weapon",
         ];
 
-        const cleanedItems = Object.values(jsonData).map((item) => {
-            item._id = item.id;
-            delete item.id;
+        const sortedItems = Object.values(combinedData)
+            .sort((a, b) => a.id - b.id)
+            .map((item) => {
+                item._id = item.id;
+                delete item.id;
 
-            for (const field of excludeFields) {
-                if (field in item) {
+                for (const field of excludeFields) {
                     delete item[field];
-                    console.log(`Removed ${field} from item ${item._id}`);
                 }
-            }
 
-            return item;
-        });
+                return item;
+            });
 
         await Weapon.deleteMany({});
         console.log("Old items removed.");
 
-        await Weapon.insertMany(cleanedItems);
-        console.log(`${cleanedItems.length} items inserted.`);
+        await Weapon.insertMany(sortedItems);
+        console.log(`${sortedItems.length} items inserted.`);
     } catch (error) {
         console.error("Error importing items:", error);
     }

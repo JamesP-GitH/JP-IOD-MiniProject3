@@ -7,6 +7,11 @@ router.get("/", (req, res) => {
     Controllers.weaponController.getAllWeapons(req, res);
 });
 
+// Get list of weapon names
+router.get("/names", (req, res) => {
+    Controllers.weaponController.getWeaponNames(req, res);
+});
+
 // Get weapons by name
 router.get("/name/:name", (req, res) => {
     Controllers.weaponController.getWeaponByName(req, res);

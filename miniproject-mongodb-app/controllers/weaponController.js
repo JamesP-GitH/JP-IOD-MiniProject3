@@ -67,6 +67,18 @@ const getAllWeaponTypes = (req, res) => {
         });
 };
 
+const getWeaponNames = (req, res) => {
+    Models.Weapon.find({}, { name: 1, _id: 0 })
+        .then((data) => {
+            const names = data.map((item) => itme.name);
+            res.send({ result: 200, data: names });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send({ result: 500, error: err.message });
+        });
+};
+
 const createWeapon = (req, res) => {
     const newWeapon = new Models.Weapon(req.body);
     newWeapon
@@ -102,6 +114,7 @@ module.exports = {
     getWeaponByName,
     getWeaponByType,
     getAllWeaponTypes,
+    getWeaponNames,
     createWeapon,
     updateWeapon,
     deleteWeapon,
