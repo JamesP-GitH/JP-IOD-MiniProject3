@@ -3,4 +3,5 @@ module.exports = {
     shieldController: require("./shieldController"),
     headController: require("./headController"),
     handController: require("./handController"),
+    bodyController: require("./bodyController"),
 };

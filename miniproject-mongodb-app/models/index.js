@@ -4,4 +4,5 @@ module.exports = {
     Shield: require("./shield"),
     Head: require("./head"),
     Hand: require("./hand"),
+    Body: require("./body"),
 };
