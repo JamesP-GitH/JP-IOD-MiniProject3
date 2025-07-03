@@ -7,4 +7,8 @@ module.exports = {
     Body: require("./body"),
     Cape: require("./cape"),
     Ammo: require("./ammo"),
+    Feet: require("./feet"),
+    Leg: require("./leg"),
+    Neck: require("./neck"),
+    Ring: require("./ring"),
 };

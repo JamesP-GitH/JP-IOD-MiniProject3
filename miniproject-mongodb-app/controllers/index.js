@@ -1,3 +1,5 @@
+const feet = require("../models/feet");
+
 module.exports = {
     weaponController: require("./weaponController"),
     shieldController: require("./shieldController"),
@@ -6,4 +8,8 @@ module.exports = {
     bodyController: require("./bodyController"),
     capeController: require("./capeController"),
     ammoController: require("./ammoController"),
+    feetController: require("./feetController"),
+    legController: require("./legController"),
+    neckController: require("./neckController"),
+    ringController: require("./ringController"),
 };
