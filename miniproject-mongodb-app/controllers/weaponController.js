@@ -53,6 +53,20 @@ const getWeaponByType = (req, res) => {
         });
 };
 
+const getAllWeaponTypes = (req, res) => {
+    Models.Weapon.distinct("weapon.weapon_type")
+        .then((types) => {
+            if (!types || types.length === 0) {
+                return res.status(404).json({ message: "No weapon types found" });
+            }
+            res.send({ result: 200, data: types });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send({ result: 500, error: err.message });
+        });
+};
+
 const createWeapon = (req, res) => {
     const newWeapon = new Models.Weapon(req.body);
     newWeapon
@@ -87,6 +101,7 @@ module.exports = {
     getWeaponById,
     getWeaponByName,
     getWeaponByType,
+    getAllWeaponTypes,
     createWeapon,
     updateWeapon,
     deleteWeapon,
