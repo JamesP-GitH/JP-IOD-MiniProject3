@@ -5,15 +5,13 @@ const fs = require("fs");
 const path = require("path");
 const Weapon = require("./models/weapon");
 
-const mongoUri = "mongodb://localhost:27017/MiniProject3"; // Change DB name if needed
+const mongoUri = "mongodb://localhost:27017/MiniProject3"; 
 
 async function run() {
     try {
-        // Connect to MongoDB
         await mongoose.connect(mongoUri);
         console.log("Connected to MongoDB");
 
-        // Load and parse JSON file
         const rawData = fs.readFileSync(path.join(__dirname, "items-weapon.json"));
         const jsonData = JSON.parse(rawData);
 

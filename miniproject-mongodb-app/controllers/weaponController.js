@@ -3,7 +3,7 @@ let Models = require("../models");
 
 const getAllWeapons = (req, res) => {
     Models.Weapon.find({})
-        .then((data) => res.send({ result: 200, data: data }))
+        .then((data) => res.send({ result: 200, data }))
         .catch((err) => {
             console.log(err);
             res.send({ result: 500, error: err.message });
@@ -16,7 +16,7 @@ const getWeaponById = (req, res) => {
             if (!data) {
                 return res.status(404).json({ message: "Weapon not found" });
             }
-            res.send({ result: 200, data: data });
+            res.send({ result: 200, data });
         })
         .catch((err) => {
             console.log(err);
@@ -30,7 +30,22 @@ const getWeaponByName = (req, res) => {
             if (data.length === 0) {
                 return res.status(404).json({ message: "No weapons found matching that name" });
             }
-            res.send({ result: 200, data: data });
+            res.send({ result: 200, data });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send({ result: 500, error: err.message });
+        });
+};
+
+const getWeaponByType = (req, res) => {
+    const type = req.params.type;
+    Models.Weapon.find({ "weapon.weapon_type": type })
+        .then((data) => {
+            if (data.length === 0) {
+                return res.status(404).json({ message: "No weapons found matching that type" });
+            }
+            res.send({ result: 200, data });
         })
         .catch((err) => {
             console.log(err);
@@ -42,7 +57,7 @@ const createWeapon = (req, res) => {
     const newWeapon = new Models.Weapon(req.body);
     newWeapon
         .save()
-        .then((data) => res.send({ result: 200, data: data }))
+        .then((data) => res.send({ result: 200, data }))
         .catch((err) => {
             console.log(err);
             res.send({ result: 500, error: err.message });
@@ -51,7 +66,7 @@ const createWeapon = (req, res) => {
 
 const updateWeapon = (req, res) => {
     Models.Weapon.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        .then((data) => res.send({ result: 200, data: data }))
+        .then((data) => res.send({ result: 200, data }))
         .catch((err) => {
             console.log(err);
             res.send({ result: 500, error: err.message });
@@ -60,7 +75,7 @@ const updateWeapon = (req, res) => {
 
 const deleteWeapon = (req, res) => {
     Models.Weapon.findByIdAndDelete(req.params.id)
-        .then((data) => res.send({ result: 200, data: data }))
+        .then((data) => res.send({ result: 200, data }))
         .catch((err) => {
             console.log(err);
             res.send({ result: 500, error: err.message });
@@ -71,6 +86,7 @@ module.exports = {
     getAllWeapons,
     getWeaponById,
     getWeaponByName,
+    getWeaponByType,
     createWeapon,
     updateWeapon,
     deleteWeapon,

@@ -12,6 +12,11 @@ router.get("/name/:name", (req, res) => {
     Controllers.weaponController.getWeaponByName(req, res);
 });
 
+// Get weapon by type
+router.get("/type/:type", (req, res) => {
+    Controllers.weaponController.getWeaponByType(req, res);
+});
+
 // Get weapon by ID
 router.get("/:id", (req, res) => {
     Controllers.weaponController.getWeaponById(req, res);
